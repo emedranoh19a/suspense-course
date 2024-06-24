@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Suspense, lazy } from "react";
+// import PokemonDetail from "./PokemonDetail";
+
+//import returns a promise.
+const PokemonDetail = lazy(() => import("./PokemonDetail"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Pokedex</h1>
+      <Suspense fallback="loading...">
+        <PokemonDetail />
+      </Suspense>
     </div>
   );
 }
 
 export default App;
+
+//1. Create the lazy component.
+//2. Add a Suspense component higher in the tree.
+//3. provide a placeholder as the "fallback" prop of Suspense.
